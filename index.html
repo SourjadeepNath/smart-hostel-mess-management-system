@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smart Hostel & Mess Management System</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">SH</div>
+        <div>
+          <p>Smart Hostel</p>
+          <span>Mess Management</span>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <button class="nav-button active" data-view="dashboard">Dashboard</button>
+        <button class="nav-button" data-view="attendance">QR Attendance</button>
+        <button class="nav-button" data-view="feedback">Mess Feedback</button>
+        <button class="nav-button" data-view="complaints">Complaints</button>
+        <button class="nav-button" data-view="visitors">Visitors</button>
+        <button class="nav-button" data-view="rooms">Room Allocation</button>
+      </nav>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Hostel operations console</p>
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <span id="today"></span>
+          <button id="export-summary" class="secondary">Export Summary</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="view active">
+        <div class="stats-grid">
+          <article class="stat-card">
+            <span>Attendance Today</span>
+            <strong id="attendance-count">0</strong>
+            <small>students checked in for meals</small>
+          </article>
+          <article class="stat-card">
+            <span>Average Mess Rating</span>
+            <strong id="rating-average">0.0</strong>
+            <small>based on recent feedback</small>
+          </article>
+          <article class="stat-card">
+            <span>Open Complaints</span>
+            <strong id="open-complaints">0</strong>
+            <small>pending staff action</small>
+          </article>
+          <article class="stat-card">
+            <span>Expected Visitors</span>
+            <strong id="visitor-count">0</strong>
+            <small>registered for today</small>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Live Mess Attendance</h2>
+              <span class="pill">QR enabled</span>
+            </div>
+            <div id="recent-attendance" class="activity-list"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Priority Queue</h2>
+              <span class="pill warning">Needs review</span>
+            </div>
+            <div id="priority-list" class="activity-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="attendance" class="view">
+        <div class="two-column">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>QR Attendance</h2>
+              <span class="pill">Meal gate</span>
+            </div>
+            <label for="student-select">Student</label>
+            <select id="student-select"></select>
+            <label for="meal-select">Meal</label>
+            <select id="meal-select">
+              <option>Breakfast</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+            </select>
+            <button id="generate-qr">Generate QR Token</button>
+            <div id="qr-card" class="qr-card" aria-live="polite"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Scan Result</h2>
+              <span class="pill success">Verified</span>
+            </div>
+            <label for="qr-input">QR token</label>
+            <input id="qr-input" placeholder="Paste or generate a QR token" />
+            <button id="mark-attendance">Mark Attendance</button>
+            <div id="attendance-log" class="activity-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="feedback" class="view">
+        <div class="two-column">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Mess Feedback</h2>
+              <span class="pill">Sentiment analysis</span>
+            </div>
+            <label for="feedback-student">Student</label>
+            <select id="feedback-student"></select>
+            <label for="rating">Rating</label>
+            <input id="rating" type="range" min="1" max="5" value="4" />
+            <label for="feedback-text">Feedback</label>
+            <textarea id="feedback-text" rows="5" placeholder="Example: Lunch was fresh but service was slow."></textarea>
+            <button id="submit-feedback">Analyze Feedback</button>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Insights</h2>
+              <span id="sentiment-badge" class="pill">Neutral</span>
+            </div>
+            <div id="feedback-insights" class="insight-box"></div>
+            <div id="feedback-list" class="activity-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="complaints" class="view">
+        <div class="two-column">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>New Complaint</h2>
+              <span class="pill">Ticketing</span>
+            </div>
+            <label for="complaint-student">Student</label>
+            <select id="complaint-student"></select>
+            <label for="complaint-category">Category</label>
+            <select id="complaint-category">
+              <option>Room maintenance</option>
+              <option>Mess quality</option>
+              <option>Water supply</option>
+              <option>Electricity</option>
+              <option>Security</option>
+            </select>
+            <label for="complaint-priority">Priority</label>
+            <select id="complaint-priority">
+              <option>Low</option>
+              <option selected>Medium</option>
+              <option>High</option>
+            </select>
+            <label for="complaint-text">Details</label>
+            <textarea id="complaint-text" rows="4" placeholder="Describe the issue"></textarea>
+            <button id="create-complaint">Create Ticket</button>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Complaint Board</h2>
+              <span class="pill warning">Track status</span>
+            </div>
+            <div id="complaint-list" class="ticket-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="visitors" class="view">
+        <div class="two-column">
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Visitor Entry</h2>
+              <span class="pill">Gate pass</span>
+            </div>
+            <label for="visitor-name">Visitor name</label>
+            <input id="visitor-name" placeholder="Visitor name" />
+            <label for="visitor-student">Visiting student</label>
+            <select id="visitor-student"></select>
+            <label for="visitor-purpose">Purpose</label>
+            <input id="visitor-purpose" placeholder="Parent visit, delivery, official work" />
+            <button id="register-visitor">Register Visitor</button>
+          </section>
+
+          <section class="panel">
+            <div class="panel-heading">
+              <h2>Visitor Log</h2>
+              <span class="pill success">Monitored</span>
+            </div>
+            <div id="visitor-list" class="activity-list"></div>
+          </section>
+        </div>
+      </section>
+
+      <section id="rooms" class="view">
+        <section class="panel">
+          <div class="panel-heading">
+            <h2>Room Allocation Optimization</h2>
+            <span class="pill">Capacity + preferences</span>
+          </div>
+          <div class="room-actions">
+            <button id="optimize-rooms">Optimize Allocation</button>
+            <button id="reset-rooms" class="secondary">Reset</button>
+          </div>
+          <div id="room-grid" class="room-grid"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
