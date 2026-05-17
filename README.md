@@ -2,6 +2,14 @@
 
 A browser-based prototype for managing hostel and mess operations.
 
+## Live Demo
+
+After GitHub Pages finishes deploying, open:
+
+```text
+https://sourjadeepnath.github.io/smart-hostel-mess-management-system/
+```
+
 ## Features
 
 - QR-based meal attendance
