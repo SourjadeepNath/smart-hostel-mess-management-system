@@ -24,14 +24,13 @@ Download or clone the repository, then open `index.html` in any modern browser.
 Install Node.js, then run:
 
 ```bash
-npm install
 npm start
 ```
 
 Open the local URL shown in the terminal, usually:
 
 ```text
-http://localhost:8080
+http://localhost:5173
 ```
 
 ## Clone from GitHub
@@ -39,7 +38,6 @@ http://localhost:8080
 ```bash
 git clone https://github.com/SourjadeepNath/smart-hostel-mess-management-system.git
 cd smart-hostel-mess-management-system
-npm install
 npm start
 ```
 
@@ -49,6 +47,7 @@ npm start
 index.html   Main application layout
 styles.css   Application styling
 app.js       Application logic and sample data
+server.js    Local static server for npm start
 ```
 
 ## Notes
